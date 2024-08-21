@@ -505,9 +505,9 @@ impl Llama {
     pub fn load(vb: VarBuilder, cfg: &Config) -> Result<Self> {
         let wte = embedding(cfg.vocab_size, cfg.hidden_size, vb.pp("model.embed_tokens"))?;
         let lm_head = if vb.contains_tensor("lm_head") {
-            linear_no_bias(cfg.hidden_size, cfg.vocab_size, vb.pp("lm_head"))?
+            linear(cfg.hidden_size, cfg.vocab_size, vb.pp("lm_head"))?
         } else {
-            Linear::from_weights(base_model.embed_tokens.embeddings().clone(), None)
+            Linear::from_weights(wte.embeddings().clone(), None)
         };
         let ln_f = RmsNorm::new(cfg.hidden_size, cfg.rms_norm_eps, vb.pp("model.norm"))?;
         let blocks: Vec<_> = (0..cfg.num_hidden_layers)
