@@ -43,9 +43,9 @@ criterion = { workspace = true }
 
 [features]
 default = []
-cuda = ["cudarc", "dep:candle-kernels", "dep:ug-cuda"]
-cudnn = ["cuda", "cudarc/cudnn"]
-mkl = ["dep:libc", "dep:intel-mkl-src"]
+cuda = ["dep:cudarc", "dep:candle-kernels", "dep:ug-cuda"]
+cudnn = ["cuda", "cudarc?/cudnn"]
+mkl = ["dep:libc", "dep:intel-mkl-src", "intel-mkl-src?/mkl-static-lp64-iomp"]
 accelerate = ["dep:libc", "dep:accelerate-src"]
 metal = ["dep:metal", "dep:candle-metal-kernels", "dep:ug-metal"]
 
