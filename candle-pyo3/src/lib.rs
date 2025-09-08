@@ -11,7 +11,7 @@ use std::sync::Arc;
 
 use half::{bf16, f16};
 
-#[cfg(feature = "mkl")]
+#[cfg(feature = "mkl-unlinked")]
 extern crate intel_mkl_src;
 
 #[cfg(feature = "accelerate")]
